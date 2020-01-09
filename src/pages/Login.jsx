@@ -42,16 +42,16 @@ class Login extends React.Component {
                         <Row>
                             <ListGroup className="mx-auto">
                                 <ListGroup.Item>
-                                    <Form onSubmit={event => event.preventDefault()}>
-                                        <Form.Group className="text-center">
+                                    <Form onSubmit={event => event.preventDefault()} className="text-center">
+                                        <Form.Group>
                                             <Image fluid width="50%" src={logo} alt="logo"/>
                                         </Form.Group>
-                                        <Form.Group>
+                                        <Form.Group className="text-left">
                                             <Form.Label>Username</Form.Label>
                                             <Form.Control type="text" placeholder="Masukan username"
                                                 name="username" onChange={(event) => this.props.handleSetGlobal(event)}/>
                                         </Form.Group>
-                                        <Form.Group>
+                                        <Form.Group className="text-left">
                                             <Form.Label>Password</Form.Label>
                                             <Form.Control type="password" placeholder="Masukan password"
                                                 name="password" onChange={(event) => this.props.handleSetGlobal(event)}/>

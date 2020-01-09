@@ -18,19 +18,15 @@ class Profile extends React.Component {
                     <Container fluid={true}>
                         <Container className="mt-5">
                             <Row>
-                                <Col md="1"></Col>
-                                <Col md="10">
-                                    <ListGroup horizontal className="mb-5">
-                                        <ListGroup.Item>
-                                            <Image width="50%" src={this.props.avatar} alt={this.props.avatar}/>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item className="pr-auto">
-                                            <p className="h3 font-weight-bold">Nama: {this.props.username}</p>
-                                            <p>{this.props.email}</p>
-                                        </ListGroup.Item>
-                                    </ListGroup>
-                                </Col>
-                                <Col md="1"></Col>
+                                <ListGroup horizontal className="mx-auto">
+                                    <ListGroup.Item variant="secondary" className="text-center">
+                                        <Image fluid src={this.props.avatar} alt={this.props.avatar}/>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item className="pr-auto">
+                                        <p className="h3 font-weight-bold">Nama: {this.props.username}</p>
+                                        <p>{this.props.email}</p>
+                                    </ListGroup.Item>
+                                </ListGroup>
                             </Row>
                         </Container>
                     </Container>

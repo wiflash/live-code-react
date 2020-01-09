@@ -21,15 +21,27 @@ class Home extends React.Component {
         const category = ["Romance" ,"Action", "Fiction", "Comedy"];
         const movieCategory = category.map(category => {
             return (
-                <Col md="3" className="text-center">
-                    <h3>{category}</h3>
-                    <Image fluid src={
-                            category === "Romance" ? Romance
-                            : category === "Action" ? Action
-                            : category === "Fiction" ? Fiction
-                            : Comedy
-                        } className="align-center" alt={category}/>
-                    <Button onClick={() => this.handleKategori(category)} className="mt-3" variant="primary">See Movies</Button>
+                <Col md="3" className="text-center mb-5">
+                    <Row>
+                        <Col md="12">
+                            <h3>{category}</h3>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md="12">
+                            <Image fluid src={
+                                    category === "Romance" ? Romance
+                                    : category === "Action" ? Action
+                                    : category === "Fiction" ? Fiction
+                                    : Comedy
+                                } className="align-center" alt={category}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md="12">
+                            <Button onClick={() => this.handleKategori(category)} className="mt-3" variant="primary">See Movies</Button>
+                        </Col>
+                    </Row>
                 </Col>
             )
         });
