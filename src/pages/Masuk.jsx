@@ -24,15 +24,10 @@ class Masuk extends React.Component {
             username: this.props.username,
             password: this.props.password
         }
-        axios.post("https://login-uhuy.free.beeceptor.com/login", data)
+        axios.post("https://api-todofancy.herokuapp.com/api/auth", data)
         .then((response) => {
-            if (response.data.hasOwnProperty("apiKey")) {
-                localStorage.setItem("apiKey", response.data.apiKey);
-                localStorage.setItem("email", response.data.email);
-                localStorage.setItem("fullname", response.data.fullname);
-                localStorage.setItem("loginKah", true);
-                this.props.history.push("/profile");
-            }
+            this.props.setUserData(response.data.user_data);
+            this.props.history.push("/profile");
         })
         .catch((error) => console.log(error));
     }
@@ -40,9 +35,7 @@ class Masuk extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <NavigationBar {...this.props}
-                    handleKategori={event => this.handleRouterKategori(event)}
-                    disableSearch={true}/>
+                <NavigationBar {...this.props}/>
                 <Container fluid={true}>
                     <Container className="mt-5">
                         <Row>
@@ -70,4 +63,4 @@ class Masuk extends React.Component {
 }
 
 
-export default connect("username, password, keyword", actions)(withRouter(Masuk));
+export default connect("username, password, email", actions)(withRouter(Masuk));

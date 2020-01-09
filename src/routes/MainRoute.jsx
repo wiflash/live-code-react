@@ -6,6 +6,7 @@ import {Route, Switch, BrowserRouter} from "react-router-dom";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import Masuk from "../pages/Masuk";
+import Movie from "../pages/Movie";
 
 
 class MainRoute extends React.Component {
@@ -16,8 +17,8 @@ class MainRoute extends React.Component {
                     <Switch>
                         <Route exact path="/" component={Home} />
                         <Route exact path="/profile" component={Profile} />
-                        <Route exact path="/masuk" component={Masuk} />
-                        <Route path="/:kategori" component={Home} />
+                        <Route exact path="/login" component={Masuk} />
+                        <Route path="/:category" component={Movie} />
                     </Switch>
                 </BrowserRouter>
             </Provider>

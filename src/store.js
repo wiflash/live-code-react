@@ -3,35 +3,30 @@ import axios from "axios";
 
 
 const initialState = {
-    apiKey: "",
-    email: "",
     username: "",
     password: "",
-    fullname: "",
+    email: "",
+    avatar: "",
     loginKah: false,
-    listNews: [],
-    sideListNews: [],
-    keyword: "",
-    loadingKah: true,
-    sideLoadingKah: true
+    listMovies: [],
+    loadingKah: true
 };
 
 export const store = createStore(initialState);
 
 
-const apiKey = "06efa54746344387aaed942eac41da02";
-const baseUrl = "https://newsapi.org/v2/";
+const baseUrl = "https://api-todofancy.herokuapp.com/api/movies";
 
 export const actions = store => ({
     handleSetGlobal: (state, event) => {
         store.setState({ [event.target.name]: event.target.value });
     },
 
-    getNews: (state, kategori) => {
-        axios.get(baseUrl + `top-headlines?country=id&category=${kategori}&q=${store.getState().keyword}&apiKey=` + apiKey)
+    getMovies: (state) => {
+        axios.get(baseUrl)
             .then((response) => {
                 store.setState({
-                    listNews: response.data.articles,
+                    listMovies: response.data.movies,
                     loadingKah: false
                 })
             })
@@ -40,17 +35,12 @@ export const actions = store => ({
             });
     },
 
-    getSideNews: () => {
-        store.setState({sideLoadingKah: true});
-        axios.get(baseUrl + `top-headlines?country=id&category=general&apiKey=` + apiKey + "&page=1&pageSize=5")
-            .then((response) => {
-                store.setState({
-                    sideListNews: response.data.articles,
-                    sideLoadingKah: false
-                })
-            })
-            .catch((error) => {
-                store.setState({sideLoadingKah: true})
-            });
+    setUserData: (state, user_data) => {
+        store.setState({
+            username: user_data.username,
+            email: user_data.email,
+            avatar: user_data.avatar,
+            loginKah: true
+        })
     }
 });

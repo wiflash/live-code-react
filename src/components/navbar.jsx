@@ -1,11 +1,17 @@
 import React from 'react';
-import {Navbar, Nav, NavDropdown, FormControl} from 'react-bootstrap';
+import {withRouter} from "react-router-dom";
+import {connect} from "unistore/react";
+import {actions, store} from "../store";
+import {Navbar, Nav} from 'react-bootstrap';
 import logo from '../logo.svg';
 
 class NavigationBar extends React.Component {
     handleAuth = menu => {
-        if (menu === "Keluar") {
-            localStorage.removeItem("loginKah");
+        if (menu === "Logout") {
+            // localStorage.removeItem("loginKah");
+            store.setState({loginKah: false});
+            this.props.history.push("/");
+        } else if (menu === "Home") {
             this.props.history.push("/");
         } else {
             this.props.history.push(`/${menu}`)
@@ -13,25 +19,9 @@ class NavigationBar extends React.Component {
     }
 
     render() {
-        const auth = ["Profile" ,"Masuk", "Keluar"];
+        const auth = ["Home" ,"Profile", "Login", "Logout"];
         const authMenu = auth.map(auth => {
             return <Nav.Link onClick={() => this.handleAuth(auth)}>{auth}</Nav.Link>;
-        });
-
-        const kategori = ["Olahraga", "Hiburan", "Bisnis"];
-        const kategoriMenu = kategori.map(kategori => {
-            return (
-                <Nav.Link onClick={() => this.props.handleKategori(kategori)}>{kategori}</Nav.Link>
-            );
-        });
-        
-        const lainnya = ["Sains", "Teknologi", "Kesehatan"];
-        const lainnyaDropdown = lainnya.map((kategoriLainnya) => {
-            return (
-                <NavDropdown.Item onClick={() => this.props.handleKategori(kategoriLainnya)}>
-                    {kategoriLainnya}
-                </NavDropdown.Item>
-            );
         });
         
         return (
@@ -39,24 +29,12 @@ class NavigationBar extends React.Component {
                 <Nav className="mr-auto">
                     <Navbar.Brand href="/">
                         <img src={logo} width="50" height="50" className="d-inline-block align-center" alt="logo"/>
-                        <span>KabarKabar</span>
+                        <span>Movie</span>
                     </Navbar.Brand>
                 </Nav>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse>
-                    <Nav className="mx-auto">
-                        {kategoriMenu}
-                        <NavDropdown title="Lainnya">
-                            {lainnyaDropdown}
-                        </NavDropdown>
-                    </Nav>
-                    <Nav className="mx-auto">
-                        <FormControl disabled={this.props.disableSearch}
-                            placeholder="Ketik untuk mencari"
-                            name="keyword" type="search"
-                            onChange={keyword => this.props.handleSearch(keyword)}/>
-                    </Nav>
-                    <Nav className="mx-auto">
+                    <Nav className="mr-auto">
                         {authMenu}
                     </Nav>
                 </Navbar.Collapse>
@@ -66,4 +44,5 @@ class NavigationBar extends React.Component {
 }
 
 
-export default NavigationBar;
+export default connect("loadingKah", actions)(withRouter(NavigationBar));
+// export default NavigationBar;
