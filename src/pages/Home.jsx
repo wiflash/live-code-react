@@ -21,8 +21,8 @@ class Home extends React.Component {
         const category = ["Romance" ,"Action", "Fiction", "Comedy"];
         const movieCategory = category.map(category => {
             return (
-                <Col md="3" className="mx-auto">
-                    <h3 className="mx-auto">{category}</h3>
+                <Col md="3" className="text-center">
+                    <h3>{category}</h3>
                     <Image fluid src={
                             category === "Romance" ? Romance
                             : category === "Action" ? Action
